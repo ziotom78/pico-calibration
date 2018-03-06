@@ -1,7 +1,9 @@
 #!/bin/bash -l
+#SBATCH --account=mp107
 #SBATCH -q regular
 #SBATCH -N 2
 #SBATCH -L cscratch1
+#SBATCH --job-name=pico-calibration
 #SBATCH -t 05:59:59
 
 ################################################################################
@@ -10,7 +12,6 @@
 ################################################################################
 
 set -o errexit
-set -v
 
 calibrate=$(which calibrate.py)
 
