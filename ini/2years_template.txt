@@ -1,0 +1,27 @@
+[input_files]
+index_file = /global/cscratch1/sd/zonca/pico/cal_sims/201804_boresight_1pix_2years/out_000/201804_boresight_1pix_2years_index_${detector}.fits
+signal_hdu = 1
+signal_column = TOTALTOD
+pointing_hdu = 1
+pointing_columns = THETA, PHI
+angle_column = PSI
+
+[dacapo]
+t_cmb_k = 2.72548
+solsysdir_ecl_colat_rad = 0.7285004297824332
+solsysdir_ecl_long_rad = 4.607494692339831
+solsysspeed_m_s = 369000.0
+nside = 256
+periods_per_cal_constant = ${periods_per_cal_constant}
+cg_stop_value = 1e-9
+cg_max_iterations = 500
+dacapo_stop_value = 1e-9
+dacapo_max_iterations = 50
+pcond = jacobi
+${mask_line}
+
+[output]
+file_name = /global/cscratch1/sd/zonca/pico/cal_sims/201804_boresight_1pix_2years/out_000/201804_boresight_1pix_2years_gains_${mask_tag}_${detector}.fits
+save_map = yes
+save_convergence_information = yes
+comment = "10 s baseline for 1/f, ${cal_duration_str} for calibration, fsky=${fsky}"
