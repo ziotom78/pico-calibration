@@ -11,7 +11,7 @@ with open('2years_template.txt', 'rt') as f:
 
     for det in ('0A', '0B'):
         for fsky, mask_tag in [(1.00, 'm100'), (0.80, 'm080'), (0.90, 'm090')]:
-            for cal_duration_h in (10, 24, 48):
+            for cal_duration_h in (1, 5, 10, 20):
                 cal_duration_str = '{0:02d}'.format(cal_duration_h)
                 periods_per_cal_constant = int(
                     cal_duration_h * 3600.0 / BASELINE_LENGTH_S)
