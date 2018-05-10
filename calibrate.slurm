@@ -1,17 +1,32 @@
 #!/bin/bash -l
 #SBATCH --account=mp107
-#SBATCH -q regular
-#SBATCH -N 2
+#SBATCH -q debug
+#SBATCH -N 109
 #SBATCH -L cscratch1
 #SBATCH --job-name=pico-calibration
-#SBATCH -t 05:59:59
+#SBATCH -t 09:59
+#SBATCH --get-user-env
 
+set -o errexit
+
+nodes=109
+nprocs=$(($nodes * 16))
+
+################################################################################
+# To use this script, you must pass the name of the INI file via the
+# INI_FILE environment variable, e.g.:
+#
+# $ INI_FILE=$HOME/myfile.ini sbatch calibrate.slurm
+#
 ################################################################################
 # WARNING: in order to run this script, you must ensure you have "calibrate.py"
 # in your PATH!
 ################################################################################
 
-set -o errexit
+if [ "$INI_FILE" == "" ]; then
+    echo "You forgot to set the INI_FILE variable!"
+    exit 1
+fi
 
 calibrate=$(which calibrate.py)
 
@@ -31,10 +46,8 @@ echo "----------------------------------------"
 env | sort -d
 echo "----------------------------------------"
 
-for inifile in ini/pico_06h_cmbonly_{0A,0B}.ini; do
-    logfile=./log/$(basename $inifile .ini).log
-    echo "Going to run srun on $(date)"
-    srun -n 48 python ${calibrate} $inifile 2>&1 | tee $logfile
-done
+logfile=./log/$(basename $INI_FILE .ini).log
+echo "Going to run srun on $(date) with $nodes nodes"
+srun -n $nprocs python ${calibrate} $INI_FILE 2>&1 | tee $logfile
 
 echo "Script ended on $(date)"
