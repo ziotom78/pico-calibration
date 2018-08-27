@@ -1,5 +1,5 @@
 [input_files]
-index_file = /global/cscratch1/sd/zonca/pico/cal_sims/${inputdir}/out_000/201804_boresight_1pix_2years_index_${detector}.fits
+index_file = /global/cscratch1/sd/zonca/pico/cal_sims/${inputdir}/out_000/201806_boresight_1pix_2years_index_${detector}.fits
 signal_hdu = 1
 signal_column = TOTALTOD
 pointing_hdu = 1
@@ -8,8 +8,8 @@ angle_column = PSI
 
 [dacapo]
 t_cmb_k = 2.72548
-solsysdir_ecl_colat_rad = 1.76560508
-solsysdir_ecl_long_rad = 2.97323038
+solsysdir_ecl_colat_rad = 1.7656051330336222
+solsysdir_ecl_long_rad = 2.9958842149922833
 solsysspeed_m_s = 370082.2332
 nside = 256
 periods_per_cal_constant = ${periods_per_cal_constant}
@@ -21,7 +21,7 @@ pcond = jacobi
 ${mask_line}
 
 [output]
-file_name = /global/cscratch1/sd/zonca/pico/cal_sims/${inputdir}/out_000/201804_boresight_1pix_2years_gains_${mask_tag}_${cal_duration_str}h_${detector}.fits
+file_name = /global/cscratch1/sd/zonca/pico/cal_sims/${inputdir}/out_000/201806_boresight_1pix_2years_gains_${mask_tag}_${cal_duration_str}h_${detector}.fits
 save_map = yes
 save_convergence_information = yes
 comment = "10 s baseline for 1/f, ${cal_duration_str} h for calibration, fsky=${fsky}"

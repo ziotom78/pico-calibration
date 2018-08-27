@@ -1,15 +1,15 @@
 #!/bin/bash -l
 #SBATCH --account=mp107
 #SBATCH -q debug
-#SBATCH -N 109
+#SBATCH -N 80
 #SBATCH -L cscratch1
 #SBATCH --job-name=pico-calibration
-#SBATCH -t 09:59
+#SBATCH -t 19:59
 #SBATCH --get-user-env
 
 set -o errexit
 
-nodes=109
+nodes=80
 nprocs=$(($nodes * 16))
 
 ################################################################################
