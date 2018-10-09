@@ -89,7 +89,7 @@ OVERALL_FILE_TEMPLATE = AtTemplate("""#!/bin/sh
 #SBATCH -N 80
 #SBATCH -t 5:00:00
 #SBATCH --account=mp107
-
+#SBATCH --job-name=overall_job
 """)
 
 
@@ -112,7 +112,7 @@ ScanningParameters = namedtuple('ScanningParameters', [
     'prec_rate_rpm',
 ])
 
-WHITE_NOISE = 33.8e-6
+WHITE_NOISE = 35.6e-6
 NOISE_PARAMS = [
     NoiseParameters(white_noise=1e-15, fknee_mHz=0),
     NoiseParameters(white_noise=WHITE_NOISE, fknee_mHz=10),
