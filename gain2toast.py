@@ -1,15 +1,27 @@
 #!/usr/bin/env python3
 # -*- encoding: utf-8 -*-
 
+"""Combine several gain files into one.
+
+The output file is formatted according to what TOAST expects.
+"""
+
 import os
 import sys
 import numpy as np
 from astropy.io import fits
 
+def fix_gains(gains):
+    "Adjust the value of the gains so that it's always around 1.0"
+
+    gains += 1.0 - np.mean(gains)
+
+
 def main(args):
+    "Main loop of the program"
     if len(args) < 4 or len(args) % 2 != 0:
         print("Usage: {0} GAIN_FILE1 DETNAME1 [GAIN_FILE2 DETNAME2...] OUTPUT_FILE"
-                .format(os.basename(args[0])))
+              .format(os.path.basename(args[0])))
         sys.exit(1)
 
     outputfilename = args[-1]
@@ -39,6 +51,8 @@ def main(args):
             if samplesincurgain == gainn[gainidx]:
                 samplesincurgain = 0
                 gainidx += 1
+
+        fix_gains(gains)
 
         cur_hdu = fits.BinTableHDU.from_columns([
             fits.Column(name='TIME', array=gainstarttime, unit='s', format='1D'),
